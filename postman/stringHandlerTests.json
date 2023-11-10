@@ -1,0 +1,641 @@
+{
+  "info": {
+    "_postman_id": "",
+    "name": "StringHandler",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": ""
+  },
+  "item": [
+    {
+      "name": "HandleFirstString",
+      "event": [
+        {
+          "listen": "test",
+          "script":{
+            "exec":[
+              "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+              "pm.response.to.be.status(201);\r",
+              "pm.response.to.be.withBody;\r",
+              "pm.response.to.be.json;\r",
+              "});\r",
+              "const source = JSON.parse(pm.request.body.raw);\r",
+              "const target = pm.response.json();\r",
+              "pm.test(\"Response data should be eql request data\", function () {\r",
+              "var jsonData = pm.response.json();\r",
+              "pm.expect(jsonData.e).to.eql(4);\r",
+              "pm.expect(jsonData.o).to.eql(3);\r",
+              "pm.expect(jsonData.r).to.eql(2);\r",
+              "pm.expect(jsonData.H).to.eql(2);\r",
+              "pm.expect(jsonData.l).to.eql(2);\r",
+              "pm.expect(jsonData.l).to.eql(2);\r",
+              "pm.expect(jsonData.A).to.eql(1);\r",
+              "pm.expect(jsonData.T).to.eql(1);\r",
+              "pm.expect(jsonData.u).to.eql(1);\r",
+              "pm.expect(jsonData.w).to.eql(1);\r",
+              "pm.expect(jsonData.h).to.eql(1);\r",
+              "pm.expect(jsonData.Y).to.eql(1);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"string\": \"HelloThereHowAreYou\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/handle",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "handle"
+          ]
+        }
+      }
+    },
+    {
+      "name": "HandleSecondString",
+      "event": [
+        {
+          "listen": "test",
+          "script":{
+            "exec":[
+              "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+              "pm.response.to.be.status(201);\r",
+              "pm.response.to.be.withBody;\r",
+              "pm.response.to.be.json;\r",
+              "});\r",
+              "const source = JSON.parse(pm.request.body.raw);\r",
+              "const target = pm.response.json();\r",
+              "pm.test(\"Response data should be eql request data\", function () {\r",
+              "var jsonData = pm.response.json();\r",
+              "pm.expect(jsonData.f).to.eql(6);\r",
+              "pm.expect(jsonData.a).to.eql(3);\r",
+              "pm.expect(jsonData.u).to.eql(3);\r",
+              "pm.expect(jsonData.l).to.eql(3);\r",
+              "pm.expect(jsonData.o).to.eql(3);\r",
+              "pm.expect(jsonData.B).to.eql(2);\r",
+              "pm.expect(jsonData.b).to.eql(1);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"string\": \"BuffalobuffaloBuffalo\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/handle",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "handle"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Validation",
+      "item": [
+        {
+          "name": "HandleEmptyString",
+          "event": [
+            {
+              "listen": "test",
+              "script":{
+                "exec":[
+                  "pm.test(\"Response must contain status code 400\", function () {\r",
+                  "pm.response.to.be.status(400);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"string\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/handle",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "handle"
+              ]
+            }
+          }
+        },
+        {
+          "name": "HandleNullString",
+          "event": [
+            {
+              "listen": "test",
+              "script":{
+                "exec":[
+                  "pm.test(\"Response must contain status code 400\", function () {\r",
+                  "pm.response.to.be.status(400);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"string\": null \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/handle",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "handle"
+              ]
+            }
+          }
+        },
+        {
+          "name": "HandleWithLessThanFiveSymbolsString",
+          "event": [
+            {
+              "listen": "test",
+              "script":{
+                "exec":[
+                  "pm.test(\"Response must contain status code 400\", function () {\r",
+                  "pm.response.to.be.status(400);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"string\": \"Buff\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/handle",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "handle"
+              ]
+            }
+          }
+        },
+        {
+          "name": "HandleWithFiveLettersString",
+          "event": [
+            {
+              "listen": "test",
+              "script":{
+                "exec":[
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(jsonData.s).to.eql(2);\r",
+                  "pm.expect(jsonData.a).to.eql(1);\r",
+                  "pm.expect(jsonData.r).to.eql(1);\r",
+                  "pm.expect(jsonData.g).to.eql(1);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"string\": \"grass\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/handle",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "handle"
+              ]
+            }
+          }
+        },
+        {
+          "name": "HandleWithMoreThanTwentyFiveSymbolsString",
+          "event": [
+            {
+              "listen": "test",
+              "script":{
+                "exec":[
+                  "pm.test(\"Response must contain status code 400\", function () {\r",
+                  "pm.response.to.be.status(400);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"string\": \"BuffaloLoofalloMoofalloDooDODD\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/handle",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "handle"
+              ]
+            }
+          }
+        },
+        {
+          "name": "HandleWithTwentyFiveSymbolsString",
+          "event": [
+            {
+              "listen": "test",
+              "script":{
+                "exec":[
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(jsonData.c).to.eql(4);\r",
+                  "pm.expect(jsonData.o).to.eql(4);\r",
+                  "pm.expect(jsonData.r).to.eql(3);\r",
+                  "pm.expect(jsonData.R).to.eql(3);\r",
+                  "pm.expect(jsonData.y).to.eql(3);\r",
+                  "pm.expect(jsonData.S).to.eql(2);\r",
+                  "pm.expect(jsonData.W).to.eql(2);\r",
+                  "pm.expect(jsonData.i).to.eql(2);\r",
+                  "pm.expect(jsonData.l).to.eql(2);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"string\": \"yRccoRoccyriSriSRllyWooWr\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/handle",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "handle"
+              ]
+            }
+          }
+        },
+        {
+          "name": "HandleWithSomeDigitsInString",
+          "event": [
+            {
+              "listen": "test",
+              "script":{
+                "exec":[
+                  "pm.test(\"Response must contain status code 400\", function () {\r",
+                  "pm.response.to.be.status(400);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"string\": \"Buff3aloLoofall45alloDooDODD\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/handle",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "handle"
+              ]
+            }
+          }
+        },
+        {
+          "name": "HandleWithSomeSymbolsInString",
+          "event": [
+            {
+              "listen": "test",
+              "script":{
+                "exec":[
+                  "pm.test(\"Response must contain status code 400\", function () {\r",
+                  "pm.response.to.be.status(400);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"string\": \"Buff!aloLoofl lallDo@ODD\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/handle",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "handle"
+              ]
+            }
+          }
+        },
+        {
+          "name": "HandleWithSomeCyrillicLettersInString",
+          "event": [
+            {
+              "listen": "test",
+              "script":{
+                "exec":[
+                  "pm.test(\"Response must contain status code 400\", function () {\r",
+                  "pm.response.to.be.status(400);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"string\": \"BuffaГkЖ\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/handle",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "handle"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}
